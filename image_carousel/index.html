@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image Carousel</title>
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <div class="carousel">
+            <button class="carousel__button carousel__button--left">
+                <img src="./img/arrow.svg" alt="arrow" style="height: 25px" />
+            </button>
+
+            <div class="carousel__track-container">
+                <ul class="carousel__track">
+                    <li class="carousel__slide">
+                        <img
+                            class="carousel__image"
+                            src="./img/img-1.jpg"
+                            alt="img-1"
+                        />
+                    </li>
+                    <li class="carousel__slide">
+                        <img
+                            class="carousel__image"
+                            src="./img/img-2.jpg"
+                            alt="img-2"
+                        />
+                    </li>
+                    <li class="carousel__slide">
+                        <img
+                            class="carousel__image"
+                            src="./img/img-3.jpg"
+                            alt="img-3"
+                        />
+                    </li>
+                </ul>
+            </div>
+
+            <button class="carousel__button carousel__button--right">
+                <img src="./img/arrow.svg" alt="arrow" style="height: 25px" />
+            </button>
+
+            <div class="carousel__nav">
+                <button class="carousel__indicator current__slide"></button>
+                <button class="carousel__indicator"></button>
+                <button class="carousel__indicator"></button>
+            </div>
+        </div>
+    </body>
+</html>
