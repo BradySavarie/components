@@ -12,14 +12,22 @@ slides.forEach((slide, index) => {
 });
 
 // When I click right, move 1 slide to the right
+function moveSlide(track, currentSlide, targetSlide) {
+    track.style.transform = `translateX(-${targetSlide.style.left})`;
+    currentSlide.classList.remove('current__slide');
+    targetSlide.classList.add('current__slide');
+}
 
 nextBtn.addEventListener('click', () => {
-    // move slide
     const currentSlide = track.querySelector('.current__slide');
     const nextSlide = currentSlide.nextElementSibling;
-    const amountToMove = nextSlide.style.left;
 
-    track.style.transform = `translateX(-${amountToMove})`;
-    currentSlide.classList.remove('current__slide');
-    nextSlide.classList.add('current__slide');
+    moveSlide(track, currentSlide, nextSlide);
+});
+
+prevBtn.addEventListener('click', () => {
+    const currentSlide = track.querySelector('.current__slide');
+    const prevSlide = currentSlide.previousElementSibling;
+
+    moveSlide(track, currentSlide, prevSlide);
 });
