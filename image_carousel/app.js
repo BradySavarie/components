@@ -10,7 +10,7 @@ slides.forEach((slide, index) => {
     slide.style.left = `${slideWidth * index}px`;
 });
 
-function moveSlide(track, currentSlide, targetSlide) {
+function moveSlide(currentSlide, targetSlide) {
     track.style.transform = `translateX(-${targetSlide.style.left})`;
     currentSlide.classList.remove('current__slide');
     targetSlide.classList.add('current__slide');
@@ -21,13 +21,28 @@ function updateIndicator(currentIndicator, targetIndicator) {
     targetIndicator.classList.add('current__slide');
 }
 
+function hideShowArrows(currentIndex) {
+    if (currentIndex === 0) {
+        prevBtn.classList.add('is__hidden');
+        nextBtn.classList.remove('is__hidden');
+    } else if (currentIndex === slides.length - 1) {
+        nextBtn.classList.add('is__hidden');
+        prevBtn.classList.remove('is__hidden');
+    } else {
+        nextBtn.classList.remove('is__hidden');
+        prevBtn.classList.remove('is__hidden');
+    }
+}
+
 nextBtn.addEventListener('click', () => {
     const currentSlide = track.querySelector('.current__slide');
     const nextSlide = currentSlide.nextElementSibling;
     const currentIndicator = nav.querySelector('.current__slide');
     const targetIndicator = currentIndicator.nextElementSibling;
-    moveSlide(track, currentSlide, nextSlide);
+    const targetIndex = slides.findIndex((slide) => slide === nextSlide);
+    moveSlide(currentSlide, nextSlide);
     updateIndicator(currentIndicator, targetIndicator);
+    hideShowArrows(targetIndex);
 });
 
 prevBtn.addEventListener('click', () => {
@@ -35,8 +50,10 @@ prevBtn.addEventListener('click', () => {
     const prevSlide = currentSlide.previousElementSibling;
     const currentIndicator = nav.querySelector('.current__slide');
     const targetIndicator = currentIndicator.previousElementSibling;
-    moveSlide(track, currentSlide, prevSlide);
+    const targetIndex = slides.findIndex((slide) => slide === prevSlide);
+    moveSlide(currentSlide, prevSlide);
     updateIndicator(currentIndicator, targetIndicator);
+    hideShowArrows(targetIndex);
 });
 
 nav.addEventListener('click', (e) => {
@@ -46,10 +63,11 @@ nav.addEventListener('click', (e) => {
 
     const currentSlide = track.querySelector('.current__slide');
     const currentIndicator = nav.querySelector('.current__slide');
-    const currentIndex = indicators.findIndex(
+    const targetIndex = indicators.findIndex(
         (indicator) => indicator === targetIndicator
     );
-    const targetSlide = slides[currentIndex];
-    moveSlide(track, currentSlide, targetSlide);
+    const targetSlide = slides[targetIndex];
+    moveSlide(currentSlide, targetSlide);
     updateIndicator(currentIndicator, targetIndicator);
+    hideShowArrows(targetIndex);
 });

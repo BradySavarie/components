@@ -7,7 +7,7 @@ body {
     position: relative;
     height: 600px;
     width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 .carousel__image {
@@ -79,4 +79,8 @@ body {
 
 .carousel__indicator.current__slide {
     background: rgba(0, 0, 0, 0.75);
+}
+
+.is__hidden {
+    display: none;
 }
