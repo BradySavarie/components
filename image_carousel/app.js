@@ -34,6 +34,24 @@ function hideShowArrows(currentIndex) {
     }
 }
 
+function autoMoveSlide() {
+    const currentSlide = track.querySelector('.current__slide');
+    let nextSlide = currentSlide.nextElementSibling;
+    const currentIndicator = nav.querySelector('.current__slide');
+    let targetIndicator = currentIndicator.nextElementSibling;
+    let targetIndex = slides.findIndex((slide) => slide === nextSlide);
+
+    if (currentSlide === slides[slides.length - 1]) {
+        nextSlide = slides[0];
+        targetIndicator = indicators[0];
+        targetIndex = 0;
+    }
+
+    moveSlide(currentSlide, nextSlide);
+    updateIndicator(currentIndicator, targetIndicator);
+    hideShowArrows(targetIndex);
+}
+
 nextBtn.addEventListener('click', () => {
     const currentSlide = track.querySelector('.current__slide');
     const nextSlide = currentSlide.nextElementSibling;
@@ -71,3 +89,5 @@ nav.addEventListener('click', (e) => {
     updateIndicator(currentIndicator, targetIndicator);
     hideShowArrows(targetIndex);
 });
+
+setInterval(autoMoveSlide, 5000);
