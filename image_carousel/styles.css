@@ -29,7 +29,7 @@ body {
     list-style-type: none;
     position: relative;
     height: 100%;
-    transition: transform 250ms ease-in;
+    transition: transform 400ms ease-in-out;
 }
 
 .carousel__slide {
@@ -74,6 +74,7 @@ body {
     height: 15px;
     background: rgba(0, 0, 0, 0.3);
     margin: 0 12px;
+    cursor: pointer;
 }
 
 .carousel__indicator.current__slide {

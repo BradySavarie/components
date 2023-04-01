@@ -6,28 +6,50 @@ const nav = document.querySelector('.carousel__nav');
 const indicators = Array.from(nav.children);
 const slideWidth = slides[0].getBoundingClientRect().width;
 
-// arrange slides next to eachother
 slides.forEach((slide, index) => {
     slide.style.left = `${slideWidth * index}px`;
 });
 
-// When I click right, move 1 slide to the right
 function moveSlide(track, currentSlide, targetSlide) {
     track.style.transform = `translateX(-${targetSlide.style.left})`;
     currentSlide.classList.remove('current__slide');
     targetSlide.classList.add('current__slide');
 }
 
+function updateIndicator(currentIndicator, targetIndicator) {
+    currentIndicator.classList.remove('current__slide');
+    targetIndicator.classList.add('current__slide');
+}
+
 nextBtn.addEventListener('click', () => {
     const currentSlide = track.querySelector('.current__slide');
     const nextSlide = currentSlide.nextElementSibling;
-
+    const currentIndicator = nav.querySelector('.current__slide');
+    const targetIndicator = currentIndicator.nextElementSibling;
     moveSlide(track, currentSlide, nextSlide);
+    updateIndicator(currentIndicator, targetIndicator);
 });
 
 prevBtn.addEventListener('click', () => {
     const currentSlide = track.querySelector('.current__slide');
     const prevSlide = currentSlide.previousElementSibling;
-
+    const currentIndicator = nav.querySelector('.current__slide');
+    const targetIndicator = currentIndicator.previousElementSibling;
     moveSlide(track, currentSlide, prevSlide);
+    updateIndicator(currentIndicator, targetIndicator);
+});
+
+nav.addEventListener('click', (e) => {
+    const targetIndicator = e.target.closest('button');
+
+    if (!targetIndicator) return;
+
+    const currentSlide = track.querySelector('.current__slide');
+    const currentIndicator = nav.querySelector('.current__slide');
+    const currentIndex = indicators.findIndex(
+        (indicator) => indicator === targetIndicator
+    );
+    const targetSlide = slides[currentIndex];
+    moveSlide(track, currentSlide, targetSlide);
+    updateIndicator(currentIndicator, targetIndicator);
 });
